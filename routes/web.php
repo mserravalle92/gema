@@ -12,9 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return redirect('colegios');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/cole', 'ColegioController@index');
+
+
+Route::resource('colegios', 'ColegioController');
+
+
