@@ -12,16 +12,18 @@
 */
 
 Route::get('/', function () {
-    return redirect('colegios');
+    return redirect('usuarios/colegios');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/cole', 'ColegioController@index');
+Route::group(['prefix' => 'usuarios' , 'middleware' => 'auth'], function () {
 
+	Route::resource('colegios', 'ColegioController');
 
-Route::resource('colegios', 'ColegioController');
+});
+
 
 
