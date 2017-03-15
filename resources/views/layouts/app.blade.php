@@ -16,6 +16,8 @@
       <link rel="stylesheet" type="text/css" href="{{asset('/css/plugins/simple-line-icons.css')}}"/>
       <link rel="stylesheet" type="text/css" href="{{asset('/css/plugins/animate.min.css')}}"/>
       <link rel="stylesheet" type="text/css" href="{{asset('/css/plugins/fullcalendar.min.css')}}"/>
+      <link rel="stylesheet" type="text/css" href="{{asset('/css/plugins/datatables.bootstrap.min.css')}}"/>
+      <link rel="stylesheet" type="text/css" href="{{asset('/css/plugins/animate.min.css')}}"/>
       <link href="{{asset('/css/style.css')}}" rel="stylesheet">
     <!-- end: Css -->
 
@@ -65,7 +67,7 @@
                       <ul>
                         <li><a href=""><span class="fa fa-cogs"></span></a></li>
                         <li><a href=""><span class="fa fa-lock"></span></a></li>
-                        <li><a href=""><span class="fa fa-power-off "></span></a></li>
+                        <li><a href="{{url('/logout')}}"><span class="fa fa-power-off "></span></a></li>
                       </ul>
                     </li>
                   </ul>
@@ -647,6 +649,8 @@
     <script src="{{asset('/js/plugins/maps/jquery.vmap.world.js')}}"></script>
     <script src="{{asset('/js/plugins/jquery.vmap.sampledata.js')}}"></script>
     <script src="{{asset('/js/plugins/chart.min.js')}}"></script>
+    <script src="{{asset('/js/plugins/jquery.mask.min.js')}}"></script>
+    <script src="{{asset('/js/plugins/jquery.knob.js')}}"></script>
 
 
     <!-- custom -->
@@ -722,6 +726,27 @@
 
       })(jQuery);
      </script>
+
+     <script src="{{asset('/js/plugins/jquery.datatables.min.js')}}"></script>
+      <script src="{{asset('/js/plugins/datatables.bootstrap.min.js')}}"></script>
+      <script src="{{asset('/js/plugins/jquery.nicescroll.js')}}"></script>
+      <script src="{{asset('/js/main.js')}}"></script>
+
+
+      <!-- custom -->
+      <script src="{{asset('/js/main.js')}}"></script>
+      <script type="text/javascript">
+        $(document).ready(function(){
+          $('#datatable').DataTable();
+        });
+      </script>
+      <script type="text/javascript">
+  $(document).ready(function(){
+        $(".btn-flip").on("click",function(){
+              $(this).find(".flip").animate().replaceWith("<span class='fa fa-check' style='font-size:2em;'></span>");
+          });
+  });
+</script>
   <!-- end: Javascript -->
   </body>
 </html>

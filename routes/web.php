@@ -17,11 +17,18 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::group(['middleware' => 'auth'], function(){
 
-Route::get('/cole', 'ColegioController@index');
+	Route::resource('colegios', 'ColegioController');
 
+});
 
-Route::resource('colegios', 'ColegioController');
+Route::get('/logout', function(){
+
+	Auth::logout();
+	return redirect('/login');	
+	
+});
+
 
 
