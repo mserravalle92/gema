@@ -35,6 +35,8 @@ class CreateAlumnoExameneTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('alumnos');
+        Schema::dropIfExists('examenes');
+        Schema::dropIfExists('alumno_examene');
     }
 }

@@ -32,6 +32,7 @@ class CreateNotaTrimestralTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('alumnos');
         Schema::drop('notaTrimestrales');
     }
 }

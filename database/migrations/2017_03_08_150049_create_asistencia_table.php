@@ -33,6 +33,7 @@ class CreateAsistenciaTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('alumnos');
         Schema::drop('asistencia');
     }
 }

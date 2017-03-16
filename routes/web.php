@@ -12,17 +12,31 @@
 */
 
 Route::get('/', function () {
-    return redirect('usuarios/colegios');
+    return redirect('/colegios');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::group(['middleware' => 'auth'], function(){
 
-Route::group(['prefix' => 'usuarios' , 'middleware' => 'auth'], function () {
 
 	Route::resource('colegios', 'ColegioController');
 
+	Route::group(['prefix' => '/colegio/{idColegio}'], function(){
+
+		Route::resource('cursos', 'CursoController');
+	
+	});
+	
+
+
+});
+
+Route::get('/logout', function(){
+
+	Auth::logout();
+	return redirect('/login');	
+	
 });
 
 

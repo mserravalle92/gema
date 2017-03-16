@@ -37,6 +37,8 @@ class CreateAlumnoTpTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('alumnos');
+        Schema::dropIfExists('tps');
         Schema::drop('alumno_tp');
     }
 }

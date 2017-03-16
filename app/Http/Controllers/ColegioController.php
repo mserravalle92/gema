@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Colegio;
+use App\User;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ColegioRequest;
 
 class ColegioController extends Controller
 {
@@ -15,8 +18,8 @@ class ColegioController extends Controller
      */
     public function index()
     {
-
-        return view('colegios.index');
+        $colegios = Colegio::all();
+        return view('colegios.index', ['colegios' => $colegios ] );
     }
 
     /**
@@ -26,7 +29,8 @@ class ColegioController extends Controller
      */
     public function create()
     {
-        //
+        $colegio = new Colegio;
+        return view('colegios.create',['colegio'=>$colegio]);
     }
 
     /**
@@ -35,9 +39,26 @@ class ColegioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ColegioRequest $request)
     {
-        //
+        $colegio = new Colegio();
+        $colegio->fill($request->all());
+        $colegio->user_id = Auth::user()->id;
+        
+        if ($colegio->save()) {
+
+            flash('Colegio agregado correctamente','success');
+            return redirect('/colegios');
+
+        }
+        else{
+
+            flash('Problema al agregar el colegio','danger');
+            return view('colegios.create');
+        }
+
+
+        
     }
 
     /**
@@ -59,7 +80,8 @@ class ColegioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $colegio = Colegio::find($id);
+        return view('colegios.edit',['colegio'=>$colegio]);
     }
 
     /**
@@ -69,9 +91,24 @@ class ColegioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ColegioRequest $request, $id)
     {
-        //
+        $colegio = Colegio::find($id);
+        $colegio->fill($request->all());
+
+        if ($colegio->save()) {
+
+            flash('Colegio agregado correctamente','success');
+            return redirect('/colegios');
+
+        }
+        else{
+
+            flash('Problema al agregar el colegio','danger');
+            return view('colegios.edit');
+        }
+
+
     }
 
     /**
@@ -82,6 +119,11 @@ class ColegioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Colegio::destroy($id);
+
+        flash('Colegio eliminado correctamente','warning');
+            return redirect('/colegios');
+
+        return redirect('/colegios');
     }
 }
